@@ -1,16 +1,10 @@
-import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
 import 'package:weather_app/blocs/weather/weather_bloc.dart';
-import 'package:weather_app/data/repository/weather_repository.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/presentation/widgets/additional_info_item.dart';
-import 'package:weather_app/presentation/widgets/hourly_forecast_item.dart';
-import 'package:weather_app/secrets.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
