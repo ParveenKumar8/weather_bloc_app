@@ -17,10 +17,15 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     try {
       emit(WeatherLoading());
 
-      final WeatherModel weatherModel =
-          await weatherRepository.getCurrentWeather(event.cityName);
-      //print(weatherModel.toString());
-      emit(WeatherSuccess(weatherModel));
+      // final WeatherModel weatherModel =
+      //     await weatherRepository.getCurrentWeather(event.cityName);
+      // //print(weatherModel.toString());
+      // emit(WeatherSuccess(weatherModel));
+
+      final List<WeatherModel> weatherList =
+          await weatherRepository.getCurrentWeather("Delhi");
+      //print('List : ${weatherList.toString()}');
+      emit(WeatherSuccess(weatherList));
     } catch (e) {
       print(e.toString());
       emit(WeatherError(e.toString()));

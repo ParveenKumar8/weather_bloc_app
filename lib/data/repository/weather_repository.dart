@@ -8,7 +8,7 @@ class WeatherRepository {
 
   WeatherRepository(this.weatherDataProvider);
 
-  Future<WeatherModel> getCurrentWeather(String city) async {
+  Future<List<WeatherModel>> getCurrentWeather(String city) async {
     try {
       final result = await weatherDataProvider.getCurrentWeather(city);
 
@@ -17,7 +17,12 @@ class WeatherRepository {
       if (data['cod'] != '200') {
         throw 'An unexpected error occurred';
       }
-      return WeatherModel.fromMap(data);
+      final weatheList = (data['list'] as List)
+          .map((weather) => WeatherModel.fromMap(weather))
+          .toList();
+      print("Weather List : ${weatheList.length}");
+      return weatheList;
+      //return WeatherModel.fromMap(data);
     } catch (e) {
       throw e.toString();
     }

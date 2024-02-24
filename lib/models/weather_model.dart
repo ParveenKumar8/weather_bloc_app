@@ -14,6 +14,7 @@ class WeatherModel {
   final String currentPressure;
   final String currentWindSpeed;
   final String currentHumidity;
+  final String currentTime;
 
   WeatherModel({
     required this.currenTemp,
@@ -21,6 +22,7 @@ class WeatherModel {
     required this.currentPressure,
     required this.currentWindSpeed,
     required this.currentHumidity,
+    required this.currentTime,
   });
 
   WeatherModel copyWith({
@@ -29,6 +31,7 @@ class WeatherModel {
     String? currentPressure,
     String? currentWindSpeed,
     String? currentHumidity,
+    String? currentTime,
   }) {
     return WeatherModel(
       currenTemp: currenTemp ?? this.currenTemp,
@@ -36,6 +39,7 @@ class WeatherModel {
       currentPressure: currentPressure ?? this.currentPressure,
       currentWindSpeed: currentWindSpeed ?? this.currentWindSpeed,
       currentHumidity: currentHumidity ?? this.currentHumidity,
+      currentTime: currentTime ?? this.currentTime,
     );
   }
 
@@ -46,11 +50,12 @@ class WeatherModel {
       'currentPressure': currentPressure,
       'currentWindSpeed': currentWindSpeed,
       'currentHumidity': currentHumidity,
+      'currentTime': currentTime,
     };
   }
 
   factory WeatherModel.fromMap(Map<String, dynamic> map) {
-    final currentWeatherData = map['list'][0];
+    final currentWeatherData = map;
     WeatherModel? model;
     try {
       model = WeatherModel(
@@ -59,6 +64,7 @@ class WeatherModel {
         currentPressure: currentWeatherData['main']['pressure'].toString(),
         currentWindSpeed: currentWeatherData['wind']['speed'].toString(),
         currentHumidity: currentWeatherData['main']['humidity'].toString(),
+        currentTime: currentWeatherData['dt_txt'].toString(),
       );
     } catch (e) {
       print(e.toString());
@@ -73,7 +79,7 @@ class WeatherModel {
 
   @override
   String toString() {
-    return 'WeatherModel(currenTemp: $currenTemp, currentSky: $currentSky, currentPressure: $currentPressure, currentWindSpeed: $currentWindSpeed, currentHumidity: $currentHumidity)';
+    return 'WeatherModel(currenTemp: $currenTemp, currentSky: $currentSky, currentPressure: $currentPressure, currentWindSpeed: $currentWindSpeed, currentHumidity: $currentHumidity, currentTime: $currentTime)';
   }
 
   @override
@@ -84,7 +90,8 @@ class WeatherModel {
         other.currentSky == currentSky &&
         other.currentPressure == currentPressure &&
         other.currentWindSpeed == currentWindSpeed &&
-        other.currentHumidity == currentHumidity;
+        other.currentHumidity == currentHumidity &&
+        other.currentTime == currentTime;
   }
 
   @override
@@ -93,6 +100,7 @@ class WeatherModel {
         currentSky.hashCode ^
         currentPressure.hashCode ^
         currentWindSpeed.hashCode ^
-        currentHumidity.hashCode;
+        currentHumidity.hashCode ^
+        currentTime.hashCode;
   }
 }
